@@ -1,0 +1,36 @@
+# Compose v2 ignores 'version' so we omit it.
+services:
+  timescale:
+    image: timescale/timescaledb-ha:pg16
+    container_name: eeg-timescale
+    environment:
+      - POSTGRES_PASSWORD=ts
+      - POSTGRES_USER=ts
+      - POSTGRES_DB=ts
+    ports:
+      - "${HOST_PGPORT:-5439}:5432"
+    volumes:
+      - timescale_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ts -d ts"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  api:
+    build: .
+    container_name: eeg-api
+    environment:
+      - TIMESCALE_URL=postgres://ts:ts@timescale:5432/ts
+      - API_KEY=${API_KEY:-changeme}
+    depends_on:
+      timescale:
+        condition: service_healthy
+    ports:
+      - "${API_PORT:-8090}:8090"
+    volumes:
+      - ./app:/app/app:ro
+      - ./tools:/app/tools:ro
+
+volumes:
+  timescale_data:

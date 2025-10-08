@@ -1,0 +1,94 @@
+# ---- Python basics ----
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+ENV/
+.python-version
+.mypy_cache/
+.pytype/
+.pytest_cache/
+.ruff_cache/
+.tox/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.cache/
+.pyre/
+
+# ---- App logs ----
+*.log
+uvicorn*.log
+
+# ---- Env & secrets ----
+.env
+.env.*
+*.env
+*.secret
+secrets.*.json
+*.pem
+*.key
+
+# ---- Editors / OS ----
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# ---- Notebooks ----
+.ipynb_checkpoints/
+
+# ---- Data & artifacts ----
+# keep folder structure but ignore heavy/raw data
+data/
+tmp/
+docker-data/
+docker-volumes/
+
+# allow docs/placeholders inside these directories
+!data/.gitkeep
+!tmp/.gitkeep
+!docker-data/.gitkeep
+!docker-volumes/.gitkeep
+!data/**/README*
+!data/README*
+!data/*.md
+
+# optionally track tiny samples if you use them
+# !data/samples/**
+# (comment the line above back in when you add small demo files)
+
+# also ignore common large file types anywhere (safety)
+*.csv
+*.tsv
+*.parquet
+*.feather
+*.npz
+*.npy
+*.jsonl
+
+# ---- Docker / Compose ----
+*.pid
+**/.DS_Store
+docker-compose.override.yml
+# if you snapshot volumes locally:
+**/timescale-data/**
+**/postgres-data/**
+**/pgdata/**
+
+# ---- Reports / misc ----
+reports/
+*.sqlite3
+
+# ---- Shell junk ----
+*.swp
+*.swo
