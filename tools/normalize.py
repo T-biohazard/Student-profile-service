@@ -1,12 +1,25 @@
 import argparse, sys
+from .parsers.kaggle_stress import KaggleStressParser
 from pathlib import Path
 
 # local parsers
 from .parsers.wesad import WESADParser
 # legacy muse parser in tools root (kept as-is)
 import subprocess, os
+from .parsers.kaggle_stress import KaggleStressParser  # <-- new
 
-DATASETS = {"wesad": WESADParser()}
+# tools/normalize.py  (top section)
+
+import argparse, sys, subprocess, os
+from pathlib import Path
+
+from .parsers.wesad import WESADParser
+from .parsers.kaggle_stress import KaggleStressParser
+
+DATASETS = {
+    "wesad": WESADParser(),
+    "kaggle_stress": KaggleStressParser(),
+}
 
 def main():
     ap = argparse.ArgumentParser(description="Normalize datasets to canonical ingest CSV")
